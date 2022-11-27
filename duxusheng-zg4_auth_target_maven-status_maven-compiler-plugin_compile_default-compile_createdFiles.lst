@@ -1,0 +1,3 @@
+com\bwie\AuthApplication.class
+com\bwie\controller\AuthController.class
+com\bwie\feign\UserFeign.class

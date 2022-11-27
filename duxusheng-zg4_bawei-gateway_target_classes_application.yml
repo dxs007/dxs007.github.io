@@ -1,0 +1,70 @@
+# Tomcat
+server:
+  port: 10002
+#eureka注册中心地址
+eureka:
+  instance:
+    # 微服务实例IP地址
+    instance-id: 127.0.0.1:${server.port}
+    # 使用IP进行访问
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka/
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: gateway
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8081
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            # 设置允许的域名
+            allowedOrigins:
+              - "*"
+            # 允许所有头信息
+            allowedHeaders: "*"
+            # 设置允许携带cookie
+            # 为true时allowedOrigins不允许为* 会报错
+            allowCredentials: false
+            # 允许跨域请求的请求方式
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+        # 鉴权
+        - id: auth
+          uri: lb://auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+        # 系统服务
+        - id: system
+          uri: lb://system
+          predicates:
+            - Path=/system/**
+          filters:
+            - StripPrefix=1
+        # 系统服务
+        - id: es
+          uri: lb://es
+          predicates:
+            - Path=/es/**
+          filters:
+            - StripPrefix=1    

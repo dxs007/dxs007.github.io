@@ -1,0 +1,19 @@
+server:
+  port: 10003
+spring:
+  data:
+    mongodb:
+      host: 192.168.201.131
+      database: tb_user
+  application:
+    name: mongdb
+
+#eureka注册中心地址
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka/
+
+

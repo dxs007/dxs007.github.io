@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bwie.mapper.InfoMapper">
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_info (name,sex,education,tel,dept_id)
+        values (#{name},#{sex},#{education},#{tel},#{deptId});
+    </insert>
+    <select id="findByName" resultType="java.lang.Integer">
+        select count(1) from tb_info where 'name' = #{name}
+    </select>
+    <select id="findByTel" resultType="java.lang.Integer">
+        select count(1) from tb_info where 'tel' = #{tel}
+    </select>
+    <select id="list" resultType="com.bwie.domain.response.InfoResponse">
+        select
+        i.*,
+        d.dept_name
+        from
+        tb_info i
+        left join tb_dept d on i.dept_id = d.id
+        <where>
+            <if test="name != null and name != ''">
+                and i.name like concat('%',#{name},'%')
+            </if>
+            <if test="deptId != null">
+                and i.dept_id = #{deptId}
+            </if>
+        </where>
+    </select>
+    <select id="findAllDept" resultType="com.bwie.domain.Department">
+        select * from tb_dept
+    </select>
+    <select id="findOneById" resultType="com.bwie.domain.Info">
+        select * from tb_info where id = #{id}
+    </select>
+</mapper>

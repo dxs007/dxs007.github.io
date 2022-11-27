@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--杜旭升-->
+<!--20222/11/20-->
+<mapper namespace="com.bwie.mapper.InfoMapper">
+    <resultMap id="BASE_RESULT_MAP_ONE_2_MANY" type="com.bwie.domain.Info">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
+<!--        多-->
+        <collection property="Department" ofType="com.bwie.domain.Department">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="deptName" column="dept_name" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_info (name,sex,education,tel,dept_id)
+        values (#{name},#{sex},#{education},#{tel},#{deptId});
+    </insert>
+    <select id="findByName" resultType="java.lang.Integer">
+        select count(1) from tb_info where 'name' = #{name}
+    </select>
+    <select id="findByTel" resultType="java.lang.Integer">
+        select count(1) from tb_info where 'tel' = #{tel}
+    </select>
+    <select id="list" resultType="com.bwie.domain.response.InfoResponse">
+        select
+        i.*,
+        d.dept_name
+        from
+        tb_info i
+        left join tb_dept d on i.dept_id = d.id
+        <where>
+            <if test="name != null and name != ''">
+                and i.name like concat('%',#{name},'%')
+            </if>
+            <if test="deptId != null">
+                and i.dept_id = #{deptId}
+            </if>
+        </where>
+    </select>
+    <select id="findAllDept" resultType="com.bwie.domain.Department">
+        select * from tb_dept
+    </select>
+    <select id="findOneById" resultType="com.bwie.domain.Info">
+        select * from tb_info where id = #{id}
+    </select>
+</mapper>

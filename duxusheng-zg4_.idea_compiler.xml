@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bawei-msg" />
+        <module name="bawei-gateway" />
+        <module name="bawei-common" />
+        <module name="bawei-eureka" />
+        <module name="auth" />
+        <module name="bawei-mongodb" />
+        <module name="bawei-system" />
+        <module name="bawei-es" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bawei-auth" target="7" />
+      <module name="gateway" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

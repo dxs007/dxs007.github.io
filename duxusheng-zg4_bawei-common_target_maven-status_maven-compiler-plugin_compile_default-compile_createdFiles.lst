@@ -1,0 +1,17 @@
+com\bwie\domain\InfoMongo.class
+com\bwie\domain\request\InfoRequest.class
+com\bwie\domain\Info.class
+com\bwie\domain\response\JwtResponse.class
+com\bwie\domain\request\ArticleRequest.class
+com\bwie\domain\Department.class
+com\bwie\domain\request\SysUserRequest.class
+com\bwie\result\PageResult.class
+com\bwie\utils\StringUtils.class
+com\bwie\utils\OssUtil.class
+com\bwie\utils\TelSmsUtils.class
+com\bwie\domain\response\InfoResponse.class
+com\bwie\domain\SysUser.class
+com\bwie\utils\JwtUtils.class
+com\bwie\domain\Article.class
+com\bwie\result\Result.class
+com\bwie\domain\User.class

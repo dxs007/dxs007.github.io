@@ -1,0 +1,9 @@
+com\bwie\service\UserService.class
+com\bwie\controller\InfoController.class
+com\bwie\service\InfoService.class
+com\bwie\controller\UserController.class
+com\bwie\mapper\InfoMapper.class
+com\bwie\mapper\UserMapper.class
+com\bwie\service\impl\InfoServiceImpl.class
+com\bwie\service\impl\UserServiceImpl.class
+com\bwie\SystemApp.class

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--杜旭升-->
+<!--20222/11/20-->
+<mapper namespace="com.bwie.mapper.UserMapper">
+    <resultMap id="T_USER_RESULTMAP" type="com.bwie.domain.User">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="findByUserName" resultType="com.bwie.domain.User">
+        select * from t_user where username = #{username}
+    </select>
+    <select id="login" resultType="com.bwie.domain.User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+</mapper>

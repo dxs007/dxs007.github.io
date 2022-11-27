@@ -1,0 +1,46 @@
+server:
+  port: 10004
+spring:
+  data:
+    mongodb:
+      host: 192.168.201.131
+      database: zgs
+  application:
+      name: system
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/zgs?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  rabbitmq:
+    listener:
+      #如果手动声明listener类型，可在config声明时设置
+      direct:
+        acknowledge-mode: MANUAL
+      simple:
+        acknowledge-mode: MANUAL
+    host: 192.168.201.131
+#eureka注册中心地址
+  redis:
+    host: 127.0.0.1
+    port: 6379
+eureka:
+  instance:
+    # 微服务实例IP地址
+    instance-id: 127.0.0.1:${server.port}
+    # 使用IP进行访问
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka/
+
+# type-aliases-package批量设置别名作用：就是在mapper.xml文件中直接写类名，不配置就需要写类的全路径名
+mybatis:
+  type-aliases-package: com.bwie.mapper
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+# 将mapper接口所在包的日志级别改成debug，可以在控制台打印sql
+logging:
+  level:
+    com.bwie.**: debug
